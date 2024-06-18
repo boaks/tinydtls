@@ -520,6 +520,11 @@ int dtls_ecdsa_generate_key2(unsigned char *priv_key,
                              size_t key_size,
                              dtls_ecdh_curve curve);
 
+int dtls_ecdsa_generate_public_key2(unsigned char *priv_key,
+                             unsigned char *pub_key,
+                             size_t key_size,
+                             dtls_ecdh_curve curve);
+
 void dtls_ecdsa_create_sig_hash(const unsigned char *priv_key, size_t key_size,
 				const unsigned char *sign_hash, size_t sign_hash_size,
 				uint32_t point_r[9], uint32_t point_s[9]);
