@@ -543,6 +543,30 @@ dtls_ecdsa_generate_key2(unsigned char *priv_key,
   return uECC_curve_private_key_size(uecc_curve);
 }
 
+int
+dtls_ecdsa_generate_public_key2(unsigned char *priv_key,
+                         unsigned char *pub_key,
+                         size_t key_size,
+                         dtls_ecdh_curve curve) {
+  int res;
+  uECC_Curve uecc_curve;
+  if (!get_uecc_curve(curve, &uecc_curve)) {
+    dtls_warn("curve %" PRIu16 " not supported\n", curve);
+    return -1;
+  }
+
+  assert(key_size >= (unsigned int)uECC_curve_private_key_size(uecc_curve));
+  assert(2 * key_size >= (unsigned int)uECC_curve_public_key_size(uecc_curve));
+
+  res = uECC_compute_public_key(priv_key, pub_key, uecc_curve);
+  if (!res) {
+    dtls_crit("cannot generate ECC public key\n");
+    memset(priv_key, 0, key_size);
+    memset(pub_key, 0, key_size * 2);
+  }
+  return res;
+}
+
 /* rfc4492#section-5.4 */
 void
 dtls_ecdsa_create_sig_hash(const unsigned char *priv_key, size_t key_size,
