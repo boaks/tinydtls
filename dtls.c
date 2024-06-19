@@ -804,6 +804,14 @@ get_cipher_suite(dtls_cipher_index_t cipher_index) {
   return cipher_suite_params[cipher_index].cipher_suite;
 }
 
+dtls_cipher_t
+dtls_get_cipher_suite(dtls_cipher_index_t cipher_index) {
+  if (cipher_index < last_cipher_suite_param) {
+    return cipher_suite_params[cipher_index].cipher_suite;
+  }
+  return TLS_NULL_WITH_NULL_NULL;
+}
+
 /**
  * Get key exchange algorithm of cipher suite.
  * \param cipher_index index to cipher suite params
