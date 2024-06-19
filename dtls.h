@@ -445,6 +445,15 @@ dtls_peer_t *dtls_get_peer(const dtls_context_t *context,
 			   const session_t *session);
 
 /**
+ * Returns the cipher suite id for the provided index.
+ *
+ * @param cipher_index  cipher_index to return cipher suite id.
+ * @return  cipher suite id, or TLS_NULL_WITH_NULL_NULL if index is not supported.
+ */
+dtls_cipher_t
+dtls_get_cipher_suite(dtls_cipher_index_t cipher_index);
+
+/**
  * Resets all connections with @p peer.
  *
  * @param context  The active DTLS context.
