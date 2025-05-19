@@ -22,6 +22,10 @@ tinydtls supports multiple platforms, including both Real-time
 and general-purpose Operating Systems. Below you find build instructions for
 all supported environments.
 
+## git / micro-ecc support 
+
+In order to use the micro-ecc implemenation, the micro-ecc must be included as a submodule. Therefore you either need to specify `--recurse-submodules` with `git clone` or do a `git submodule update --init --recursive` in an existing working copy.
+
 ## POSIX-oriented Operating Systems
 
 When using the code from the git
